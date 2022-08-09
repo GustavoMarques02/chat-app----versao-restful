@@ -27,7 +27,7 @@ class Client:
                 print("Error: Destination does not exist")
 
 
-    def __liste_for_message(self):
+    def __listen_for_messages(self):
         me_addr = const.registry[self.me]
         me_ip = me_addr[0]
         me_port = me_addr[1]
