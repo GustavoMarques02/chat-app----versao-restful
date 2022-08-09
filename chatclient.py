@@ -1,4 +1,3 @@
-from crypt import methods
 import requests
 import sys
 import threading
