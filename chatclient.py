@@ -9,7 +9,7 @@ class Client:
 
     def __init__(self):
         self.me = str(sys.argv[1])
-        self.url = 'http://' + const.CHAT_SERVER_HOST + ':' + const.CHAT_SERVER_PORT + '/'
+        self.url = 'http://' + const.CHAT_SERVER_HOST + ':' + const.CHAT_SERVER_PORT + '/chat/message'
         self.header = 'Content-type: application/json'
         threading.Thread(target=self.__listen_for_messages).start()
 
