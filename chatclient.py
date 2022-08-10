@@ -1,3 +1,4 @@
+from email import message
 import requests
 import sys
 import threading
@@ -32,7 +33,8 @@ class Client:
             'ip': me_ip,
             'port': me_port
         }
-        for message in requests.get(self.url, json=dat).text:
+        while True:
+            message = requests.get(self.url, json=dat).text
             message = json.loads(message)
             print("\nMESSAGE: " + message['text'] + " - FROM: " + message['nameSender'])
 
