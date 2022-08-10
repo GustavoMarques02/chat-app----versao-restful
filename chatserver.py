@@ -15,7 +15,7 @@ def sendMessage():
     try:
         const.registry[request.json['nameDestination']]
     except:
-        return 'False'
+        return 'NOT OK'
     else:
         dat = {
             'text': request.json['text'],
@@ -23,7 +23,7 @@ def sendMessage():
             'nameDestination': request.json['nameDestination']
         }
         chatsWaitingBD.append(dat)
-        return 'True'
+        return 'OK'
 
 @app.route('/chat/message', methods=['GET'])
 def relayMessage():
