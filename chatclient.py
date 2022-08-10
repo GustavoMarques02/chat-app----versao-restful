@@ -9,7 +9,6 @@ class Client:
     def __init__(self):
         self.me = str(sys.argv[1])
         self.url = 'http://' + const.CHAT_SERVER_HOST + ':' + const.CHAT_SERVER_PORT + '/chat/message'
-        self.header = 'Content-type: application/json'
         threading.Thread(target=self.__listen_for_messages).start()
 
         while True:
@@ -20,9 +19,8 @@ class Client:
                 'nameDestination': dest,
                 'nameSende': self.me
             }
-            response = requests.post(self.url, headers=self.header, data=message).text
-            response = json.loads(response)
-            if not response.confirmation:
+            response = requests.post(self.url, json=message).text
+            if not response == 'OK':
                 print("Error: Destination does not exist")
 
 
@@ -34,7 +32,7 @@ class Client:
             'ip': me_ip,
             'port': me_port
         }
-        for message in requests.get(self.url, headers=self.header, data=dat).text:
+        for message in requests.get(self.url, json=dat).text:
             message = json.loads(message)
             print("\nMESSAGE: " + message['text'] + " - FROM: " + message['nameSender'])
 
