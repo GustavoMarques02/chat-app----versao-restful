@@ -42,4 +42,4 @@ def relayMessage():
                     return jsonify(c)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host=const.CHAT_SERVER_HOST, port=const.CHAT_SERVER_PORT)
