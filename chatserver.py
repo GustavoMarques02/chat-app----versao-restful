@@ -29,17 +29,17 @@ def sendMessage():
 def relayMessage():
     while True:
         auxChat = chatsWaitingBD
-        for c in auxChat:
-            chatsWaitingBD.remove(c)
-            chatsRelayingBD.append(c)
+        for chat in auxChat:
+            chatsWaitingBD.remove(chat)
+            chatsRelayingBD.append(chat)
         auxChat = chatsRelayingBD
-        for c in auxChat:
-            dest_addr = const.registry[c['nameDestination']]
+        for chat in auxChat:
+            dest_addr = const.registry[chat['nameDestination']]
             dest_ip = dest_addr[0]
             dest_port = dest_addr[1]
             if dest_ip == request.json['ip'] and dest_port == request.json['port']:
-                    chatsRelayingBD.remove(c)
-                    return jsonify(c)
+                    chatsRelayingBD.remove(chat)
+                    return chat
 
 if __name__ == '__main__':
     app.run(host=const.CHAT_SERVER_HOST, port=const.CHAT_SERVER_PORT)
