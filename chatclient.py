@@ -15,9 +15,9 @@ class Client:
 
         while True:
             dest = input("ENTER DESTINATION:\n")
-            reply = input("DO YOU WANT TO REPLY TO A MESSAGE? (yes/no)")
+            reply = input("DO YOU WANT TO REPLY TO A MESSAGE? (yes/no)\n")
             if reply == 'yes':
-                number = int(input("ENTER THE MENSAGE NUMBER:"))
+                number = int(input("ENTER THE MENSAGE NUMBER:\n"))
             else:
                 number = 0
             msg = input("ENTER MESSAGE:\n")
@@ -45,7 +45,7 @@ class Client:
         while True:
             message = requests.get(self.url, json=dat).text
             message = json.loads(message)
-            print("NUMBER:" + message['number'] + " MESSAGE: " + message['text'] + " - FROM: " + message['nameSender'])
+            print("NUMBER:" + str(message['number']) + " MESSAGE: " + message['text'] + " - FROM: " + message['nameSender'])
             if message['messageReply'] != '':
                 print("REPLY TO: " + message['messageReply'])
 
