@@ -28,8 +28,7 @@ def sendMessage():
         if request.json['numberReply'] == 0:
             dat['messageReply'] = ''
         else:
-            aux = [chat for chat in chatsSentBD if (chat['number'] == request.json['numberReply'])]
-            dat['messageReply'] = aux['text']
+            dat['messageReply'] = findChatText(chatsSentBD, request.json['numberReply'])
         chatsWaitingBD.append(dat)
         return 'OK'
 
@@ -49,6 +48,11 @@ def relayMessage():
                 chatsRelayingBD.remove(chat)
                 chatsSentBD.append(chat)
                 return chat
+
+def findChatText(chatBD, number):
+    for chat in chatBD:
+        if chat['number'] == number:
+            return chat['text']
 
 if __name__ == '__main__':
     app.run(host=const.CHAT_SERVER_HOST, port=const.CHAT_SERVER_PORT)
