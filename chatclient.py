@@ -13,12 +13,12 @@ class Client:
         threading.Thread(target=self.__listen_for_messages).start()
 
         while True:
-            dest = input("ENTER DESTINATION: ")
-            msg = input("ENTER MESSAGE: ")
+            dest = input("ENTER DESTINATION:\n")
+            msg = input("ENTER MESSAGE:\n")
             message = {
                 'text': msg,
                 'nameDestination': dest,
-                'nameSende': self.me
+                'nameSender': self.me
             }
             response = requests.post(self.url, json=message).text
             if not response == 'OK':
@@ -36,7 +36,7 @@ class Client:
         while True:
             message = requests.get(self.url, json=dat).text
             message = json.loads(message)
-            print("\nMESSAGE: " + message['text'] + " - FROM: " + message['nameSender'])
+            print("MESSAGE: " + message['text'] + " - FROM: " + message['nameSender'])
 
 if __name__ == '__main__':
     c = Client()
